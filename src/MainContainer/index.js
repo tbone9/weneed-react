@@ -1,4 +1,6 @@
 import React, {Component} from 'react';
+import { Link } from 'react-router-dom';
+import Post from '../Post';
 
 class MainContainer extends Component {
     constructor() {
@@ -7,20 +9,17 @@ class MainContainer extends Component {
             posts: []
         }
     }
-    // componentDidMount = () => {
-    //     this.getPosts();
-    // }
+    componentDidMount = () => {
+        this.getPosts();
+    }
     
     getPosts = async() => {
         try {
             const posts = await fetch(`${process.env.REACT_APP_API_URL}/post/`, {
                 method: 'GET',
-                // mode:'no-cors',
                 headers: {
                     'Content-Type': 'application/json',
-                    // 'Access-Control-Allow-Origin': '*'
                 },
-                // credentials: 'include'
             });
             const response = await posts.json();
             console.log(response.data);
@@ -31,22 +30,15 @@ class MainContainer extends Component {
     };
 
     render(){
-        const posts = this.state.posts.map((post) => {
-            return(
-                <div key={post._id}>
-                    <h2>{post.title}</h2>
-                    <p>{post.description}</p>
-                    <p>Type: {post.postType}</p>
-                    <p>Category: {post.category}</p>
-                </div>
-            )
-        })
+        
         return(
-            <div>
-                <h1>Main Container</h1>
-                <button onClick={this.getPosts}>Get Posts</button>
+            <div className='mainContainer'>
+                <h1>Latest Posts</h1>
+                <Link to='/create-post'>Create a Post</Link>
+                {this.state.posts.map((post) => {
+                    return <Post post={post} />
+                })}
                 
-                    {posts}
                 
             </div>
 

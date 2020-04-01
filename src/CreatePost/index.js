@@ -1,28 +1,77 @@
 import React, {Component} from 'react';
 
-function createPost(props) {
-    return (
-        <form onSubmit={(e) => props.createPost(e, this.body)}>
-            <label for='title'>Title: </label>
-            <input type='text' id='title' name='title'/><br></br>
-            <label for='description'>Description: </label>
-            <textarea id='description' name='description' rows='4' cols='50'></textarea><br></br>
-            <label for='postType'>Post Type: </label>
-            <select id='postType' name='postType'>
-                <option value='need'>I Need</option>
-                <option value='have'>I Have</option>
-            </select><br></br>
-            <label for='category'>Category: </label>
-            <select id='category' name='category'>
-                <option value='food'>Food</option>
-                <option value='medicical'>Medical</option>
-                <option value='service'>Service</option>
-            </select><br></br>
+class CreatePost extends Component {
+    constructor() {
+        super();
+        this.state = {
+            title: '',
+            description: '',
+            postType: '',
+            category: ''
+        }
+    }
 
-            <input type='submit' value='Submit'/>
+    // postType and category don't set state by default because they are drop-down menus, so this sets their state to initical values
+    componentDidMount = () => {
+        this.setState({
+            postType: 'need',
+            category: 'food'
+        })
+    }
 
-        </form>
-    )
+    // This sets the state to the current value of the form
+    handleChange = (e) => {
+        this.setState({
+            [e.currentTarget.name]: e.currentTarget.value
+        })
+        console.log(e.currentTarget.name, 'current target')
+    } 
+    
+    createPost = async(e, post) => {
+        e.preventDefault()
+        console.log(post);
+        try {
+            const createdPost = await fetch(`${process.env.REACT_APP_API_URL}/post/`, {
+                method: 'POST',
+                body: JSON.stringify(post),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+            const response = await createdPost.json();
+            console.log(response);
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    render(){
+        return (
+            <form 
+            onSubmit={(e) => this.createPost(e, this.state)}
+            >
+                <label htmlFor='title'>Title: </label>
+                <input type='text' id='title' name='title' onChange={this.handleChange}/><br></br>
+                <label htmlFor='description'>Description: </label>
+                <textarea id='description' name='description' rows='4' cols='50' onChange={this.handleChange}></textarea><br></br>
+                <label htmlFor='postType'>Post Type: </label>
+                <select id='postType' name='postType' onChange={this.handleChange}>
+                    <option value='need'>I Need</option>
+                    <option value='have'>I Have</option>
+                </select><br></br>
+                <label htmlFor='category'>Category: </label>
+                <select id='category' name='category' onChange={this.handleChange}>
+                    <option value='food'>Food</option>
+                    <option value='medical'>Medical</option>
+                    <option value='service'>Service</option>
+                </select><br></br>
+    
+                <input type='submit' value='Submit'/>
+    
+            </form>
+        )
+
+    }
 }
 
-export default createPost;
+export default CreatePost;

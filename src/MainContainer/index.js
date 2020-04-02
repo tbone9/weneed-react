@@ -34,11 +34,11 @@ class MainContainer extends Component {
     render(){
         
         return(
-            <div className='mainContainer'>
+            <div >
                 <h1>Latest Posts</h1>
                 <Link to='/create-post'>Create a Post</Link>
                 {this.state.posts.map((post) => {
-                    return <Post post={post} />
+                    return <Post key={post._id} post={post} />
                 })}
                 
                 

@@ -5,6 +5,7 @@ import HeaderComponent from './HeaderComponent';
 import MainContainer from './MainContainer';
 import CreatePost from './CreatePost';
 import Register from './Register';
+import Login from './Login';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Route exact path='/main' component={MainContainer}/>
         <Route exact path='/create-post' component={CreatePost}/>
         <Route exact path='/register' component={Register}/>
+        <Route exact path='/login' component={Login}/>
         
       </Switch>
       </div>

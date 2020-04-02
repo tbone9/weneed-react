@@ -9,6 +9,7 @@ function HeaderComponent(){
             <ul>
                 <Link to='/main'>Main</Link>
                 <Link to='/register'>Register</Link>
+                <Link to='/login'>Log In</Link>
             </ul>
         </div>
     )

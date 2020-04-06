@@ -25,13 +25,14 @@ class CreatePost extends Component {
             [e.currentTarget.name]: e.currentTarget.value
         })
         console.log(e.currentTarget.name, 'current target')
+        // console.log(this.props.match.params.id)
     } 
     
     createPost = async(e, post) => {
         e.preventDefault()
         console.log(post);
         try {
-            const createdPost = await fetch(`${process.env.REACT_APP_API_URL}/post/`, {
+            const createdPost = await fetch(`${process.env.REACT_APP_API_URL}/group/${this.props.match.params.id}`, {
                 method: 'POST',
                 body: JSON.stringify(post),
                 headers: {
@@ -40,6 +41,7 @@ class CreatePost extends Component {
             });
             const response = await createdPost.json();
             console.log(response);
+            this.props.history.push(`/group/${this.props.match.params.id}`); 
         } catch (error) {
             console.log(error);
         }

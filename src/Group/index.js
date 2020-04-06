@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
 // import { Link } from 'react-router-dom';
 import Post from '../Post';
+import { Link } from 'react-router-dom';
 
 function Group({ match }) {
     useEffect(() => {
@@ -20,13 +21,17 @@ function Group({ match }) {
                         });
         // console.log(data)
         let group = await data.json();
-        console.log(group.posts[0])
+        console.log(group)
         
         setGroup(group);
     }
     return (
         <div>
-            <h1>{group.title}</h1>  
+            <h2>{group.title}</h2> 
+            <p>{group.description}</p> 
+            <p>Group created: {group.date}</p>
+            <Link to={`/group/create-post/${group._id}`}>Make a Post</Link>
+            <h3>Posts:</h3>
             {group.posts.map(post => (
                     
                         <Post key={post._id} post={post}/>

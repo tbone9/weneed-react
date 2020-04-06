@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import { Link } from 'react-router-dom';
-import Group from '../Group';
+// import Group from '../Group';
 
 function MainContainer() {
     useEffect(() => {

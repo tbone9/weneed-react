@@ -6,7 +6,6 @@ import MainContainer from './MainContainer';
 import CreatePost from './CreatePost';
 import Register from './Register';
 import Login from './Login';
-import GroupPage from './GroupPage';
 import Group from './Group';
 
 function App() {
@@ -17,10 +16,9 @@ function App() {
       <HeaderComponent />
         <div className='mainContainer'>
         <Switch>
-          <Route exact path='/main/group-page' component={GroupPage}/>
           
           <Route exact path='/main' component={MainContainer}/>
-          <Route exact path='/create-post' component={CreatePost}/>
+          <Route exact path='/group/create-post/:id' component={CreatePost}/>
           <Route exact path='/register' component={Register}/>
           <Route exact path='/login' component={Login}/>
           <Route exact path='/group/:id' component={Group}/>

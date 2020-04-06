@@ -1,13 +1,14 @@
 import React, {Component} from 'react';
 
 class CreatePost extends Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
             title: '',
             description: '',
             postType: '',
-            category: ''
+            category: '',
+            groupId: props.match.params.id
         }
     }
 

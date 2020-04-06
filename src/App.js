@@ -1,26 +1,33 @@
 import React from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import './App.css';
 import HeaderComponent from './HeaderComponent';
 import MainContainer from './MainContainer';
 import CreatePost from './CreatePost';
 import Register from './Register';
 import Login from './Login';
+import GroupPage from './GroupPage';
+import Group from './Group';
 
 function App() {
   return (
     <div className="App">
+      <Router>
+        
       <HeaderComponent />
-      <div className='mainContainer'>
-      <Switch>
-        
-        <Route exact path='/main' component={MainContainer}/>
-        <Route exact path='/create-post' component={CreatePost}/>
-        <Route exact path='/register' component={Register}/>
-        <Route exact path='/login' component={Login}/>
-        
-      </Switch>
+        <div className='mainContainer'>
+        <Switch>
+          <Route exact path='/main/group-page' component={GroupPage}/>
+          
+          <Route exact path='/main' component={MainContainer}/>
+          <Route exact path='/create-post' component={CreatePost}/>
+          <Route exact path='/register' component={Register}/>
+          <Route exact path='/login' component={Login}/>
+          <Route exact path='/group/:id' component={Group}/>
+          
+        </Switch>
       </div>
+      </Router>
     </div>
   );
 }

@@ -7,6 +7,7 @@ import CreatePost from './CreatePost';
 import Register from './Register';
 import Login from './Login';
 import Group from './Group';
+import CreateGroup from './CreateGroup';
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
           <Route exact path='/register' component={Register}/>
           <Route exact path='/login' component={Login}/>
           <Route exact path='/group/:id' component={Group}/>
+          <Route exact path='/create-group' component={CreateGroup}/>
           
         </Switch>
       </div>

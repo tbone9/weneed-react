@@ -24,6 +24,7 @@ function MainContainer() {
     return (
         <div>
             <h1>My Groups</h1>
+            <Link to={'/create-group'}>Create a Group</Link>
                 
                 {groups.map(group => (
                     <h2 key={group._id}>

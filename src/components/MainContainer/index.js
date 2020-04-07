@@ -1,29 +1,26 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect} from 'react';
 import { Link } from 'react-router-dom';
-// import Group from '../Group';
+import { fetchGroups } from '../../services/ajax';
 
 function MainContainer() {
+
+    
+
     useEffect(() => {
-        fetchGroups();
+        let groups;
+        async function fetchData() {
+            groups = await fetchGroups();
+            setGroups(groups)
+        }
+        fetchData();
     }, []);
 
     const [groups, setGroups] = useState([]);
 
-    const fetchGroups = async () => {
-        const data = await fetch(`${process.env.REACT_APP_API_URL}/group/`, {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-                            },
-                        });
-        let groups = await data.json();
-        groups = groups.data;
-        console.log(groups)
-        setGroups(groups);
-    }
     return (
         <div>
             <h1>My Groups</h1>
+            
             <Link to={'/create-group'}>Create a Group</Link>
                 
                 {groups.map(group => (

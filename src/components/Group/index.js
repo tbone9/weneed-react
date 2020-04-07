@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
-// import { Link } from 'react-router-dom';
 import Post from '../Post';
 import { Link } from 'react-router-dom';
+import { fetchGroup } from '../../services/ajax';
 
 class Group extends Component {
     constructor(){
@@ -12,28 +12,14 @@ class Group extends Component {
         };
     }
 
-    componentDidMount = () => {
-        this.fetchGroup();
-    }
+    async componentDidMount () {
+        const group = await fetchGroup(this.props.match.params.id);
 
-    fetchGroup = async () => {
-        const data = await fetch(`${process.env.REACT_APP_API_URL}/group/${this.props.match.params.id}`, {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-                    },
-                });
-        const group = await data.json();
-        const groupPosts = group.posts;
-        groupPosts.sort(function(a,b){ 
-            if (a.date > b.date) return -1;
-            if (a.date < b.date) return 1;
-            return 0;
-        });
         this.setState({
             group: group,
-            posts: groupPosts
+            posts: group.data
         })
+        
     }
 
     render(){
